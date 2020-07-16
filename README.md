@@ -6,10 +6,16 @@
 $ sudo npm install -g cordova
 ```
 
-### Serve project
+### Run project on Browser
 
+Add platform browser
 ```bash
-$ cordova run browser --live-reload
+$ cordova platform add browser
+```
+
+Run project
+```bash
+$ cordova run browser
 ```
 
 ### Folder structure

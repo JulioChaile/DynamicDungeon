@@ -71,31 +71,31 @@
 </data>
  </layer>
  <objectgroup id="4" name="obsta">
-  <object id="19" name="monster" x="209.571" y="140.712">
+  <object id="19" name="monster" x="192" y="144">
    <point/>
   </object>
-  <object id="21" name="crack" x="378.426" y="281.424">
+  <object id="21" name="crack" x="368.051" y="288.049">
    <point/>
   </object>
  </objectgroup>
  <objectgroup id="5" name="item">
-  <object id="17" name="iron" x="461.057" y="281.424">
+  <object id="17" name="iron" x="449.724" y="288.424">
    <point/>
   </object>
-  <object id="23" name="plant" x="24.5498" y="210.17">
+  <object id="23" name="plant" x="16" y="210">
    <point/>
   </object>
  </objectgroup>
  <objectgroup id="7" name="object">
-  <object id="24" name="chest" x="208.374" y="36.5253">
+  <object id="24" name="chest" x="200" y="48">
    <point/>
   </object>
  </objectgroup>
  <objectgroup id="6" name="npc">
-  <object id="11" name="wizard" x="249.09" y="408.365">
+  <object id="11" name="wizard" x="240.09" y="416.053">
    <point/>
   </object>
-  <object id="22" name="smith" x="383.815" y="177.237">
+  <object id="22" name="smith" x="384" y="176">
    <point/>
   </object>
  </objectgroup>

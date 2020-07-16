@@ -51,6 +51,16 @@ var Principal = new Phaser.Class({
         var floor = map.createStaticLayer('floor', tiles, 0, 0);
         var wall = map.createStaticLayer('wall', tiles, 0, 0);
 
+        var monster = map.createFromObjects('obsta', 'monster')
+
+        var chest = map.createFromObjects('object', 'chest')
+        
+        var wizard = map.createFromObjects('npc', 'wizard')
+        var smith = map.createFromObjects('npc', 'smith', {flipX: true})
+
+        var iron = map.createFromObjects('item', 'iron')
+        var plant = map.createFromObjects('item', 'plant')
+
         // colisiones con la capa de muros
         wall.setCollisionByExclusion([-1]);
 
@@ -92,6 +102,38 @@ var Principal = new Phaser.Class({
             repeat: -1
         });
 
+        this.anims.create({
+            key: 'mons',
+            frames: this.anims.generateFrameNumbers('monster', { frames: [0, 1, 2, 3, 4]}),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'wiz',
+            frames: this.anims.generateFrameNumbers('wizard', { frames: [0, 1, 2, 3, 4]}),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'smi',
+            frames: this.anims.generateFrameNumbers('smith', { frames: [0, 1, 2, 3, 4]}),
+            frameRate: 10,
+            repeat: -1
+        });
+        this.anims.create({
+            key: 'chs',
+            frames: this.anims.generateFrameNumbers('chest', { frames: [0, 1, 2]}),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.anims.play('mons', monster)
+        this.anims.play('wiz', wizard)
+        this.anims.play('smi', smith)
+        this.anims.play('chs', chest)
+        this.add.image('iron')
+        this.add.image('plant')
+
         // colision del jugador con los muros
         this.physics.add.collider(this.player, wall);
 
@@ -102,7 +144,7 @@ var Principal = new Phaser.Class({
     },
 
     update: function() {
-        // deja quito al jugador
+        // deja quieto al jugador
         this.player.body.setVelocity(0);
 
         // Horizontal movement
@@ -146,7 +188,7 @@ var Principal = new Phaser.Class({
         }
         else
         {
-            this.player.anims.play('down', true); // esto es para que de saltitos en el lugar
+            this.player.anims.play('down', true); // esto es para que de saltitos en el lugar      
         }
     }
 });
@@ -193,3 +235,4 @@ var config = {
         Dialog
     ]
 };
+const game = new Phaser.Game(config);

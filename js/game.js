@@ -1,3 +1,4 @@
+// escena principal, se carga el mapa con todo en el
 var Principal = new Phaser.Class({
     Extends: Phaser.Scene,
 
@@ -19,25 +20,52 @@ var Principal = new Phaser.Class({
         
         // our two characters
         this.load.spritesheet('player', 'assets/dude.png', { frameWidth: 16, frameHeight: 27 });
+
+        // objects
+        this.load.spritesheet('chest', 'assets/object/chest.png', {frameWidth: 16, frameHeight: 16})
+
+        // obstacles
+        this.load.spritesheet('monster', 'assets/obstacle/monster.png', {frameWidth: 32, frameHeight: 32})
+
+        // npc
+        this.load.spritesheet('smith', 'assets/npc/smith.png', {frameWidth: 16, frameHeight: 18})
+        this.load.spritesheet('wizard', 'assets/npc/wizard.png', {frameWidth: 16, frameHeight: 32})
+
+        // items
+        this.load.image('keyExit', 'assets/item/keyExit.png')
+        this.load.image('iron', 'assets/item/iron.png')
+        this.load.image('plant', 'assets/item/plant.png')
+        this.load.image('sword', 'assets/item/sword.png')
+        this.load.spritesheet('potions', 'assets/item/potions.png', {frameWidth: 16, frameHeight: 16})
+
     },
 
     create: function() {
+        // se crea el mapa desde el JSON cargado en preload
         var map = this.make.tilemap({ key: 'map' });
 
+        // se cargan los patrones del mapa
         var tiles = map.addTilesetImage('dungeon', 'tiles');
         
+        //se crean las capas del piso y muros
         var floor = map.createStaticLayer('floor', tiles, 0, 0);
         var wall = map.createStaticLayer('wall', tiles, 0, 0);
+
+        // colisiones con la capa de muros
         wall.setCollisionByExclusion([-1]);
 
+        // jugador y fisicas
         this.player = this.physics.add.sprite(120, 330, 'player', 1);
 
+        // se delimitan los limites del mapa y se da la colision con lo mismos (medio al pedo porque no hay muros en todos lados)
         this.physics.world.bounds.width = map.widthInPixels;
         this.physics.world.bounds.height = map.heightInPixels;
         this.player.setCollideWorldBounds(true);
 
+        // con esto se aceptan las entradas del teclado de las flechas
         this.cursors = this.input.keyboard.createCursorKeys();
 
+        // creacion de las animaciones de movimiento para el jugador
         this.anims.create({
             key: 'left',
             frames: this.anims.generateFrameNumbers('player', { frames: [4, 5, 6, 7, 8]}),
@@ -64,14 +92,17 @@ var Principal = new Phaser.Class({
             repeat: -1
         });
 
+        // colision del jugador con los muros
         this.physics.add.collider(this.player, wall);
 
+        // seguimiento de la camara y colision de la misma con los bordes del mapa
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(this.player);
         this.cameras.main.roundPixels = true;
     },
 
     update: function() {
+        // deja quito al jugador
         this.player.body.setVelocity(0);
 
         // Horizontal movement
@@ -94,6 +125,7 @@ var Principal = new Phaser.Class({
             this.player.body.setVelocityY(80);
         }
 
+        // se llama a las animaciones segun donde se mueva
         if (this.cursors.left.isDown)
         {
             this.player.anims.play('left', true);
@@ -114,11 +146,12 @@ var Principal = new Phaser.Class({
         }
         else
         {
-            this.player.anims.stop();
+            this.player.anims.play('down', true); // esto es para que de saltitos en el lugar
         }
     }
 });
 
+// esta escena es para programar los dialogos con los npc y las alertas cuando se toman objectos, se realizan acciones, etc
 var Dialog = new Phaser.Class({
     Extends: Phaser.Scene,
 

@@ -52,8 +52,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":209.571265587045,
-                 "y":140.712135465587
+                 "x":209.571,
+                 "y":140.712
                 }, 
                 {
                  "height":0,
@@ -64,8 +64,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":378.425828145749,
-                 "y":281.424270931174
+                 "x":378.426,
+                 "y":281.424
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -87,32 +87,43 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":461.056784291498,
-                 "y":281.424270931174
-                }, 
-                {
-                 "height":0,
-                 "id":18,
-                 "name":"keyexit",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":209.571265587045,
-                 "y":44.3093532955466
+                 "x":461.057,
+                 "y":281.424
                 }, 
                 {
                  "height":0,
                  "id":23,
-                 "name":"flowerss",
+                 "name":"plant",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":24.5497768259109,
-                 "y":210.170040631579
+                 "x":24.5498,
+                 "y":210.17
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":7,
+         "name":"object",
+         "objects":[
+                {
+                 "height":0,
+                 "id":24,
+                 "name":"chest",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":208.374,
+                 "y":36.5253
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -134,8 +145,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":249.090418526316,
-                 "y":408.36458037247
+                 "x":249.09,
+                 "y":408.365
                 }, 
                 {
                  "height":0,
@@ -146,8 +157,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":383.814803546559,
-                 "y":177.237413182186
+                 "x":383.815,
+                 "y":177.237
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -155,8 +166,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":7,
- "nextobjectid":24,
+ "nextlayerid":8,
+ "nextobjectid":25,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.1",

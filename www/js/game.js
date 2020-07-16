@@ -193,4 +193,3 @@ var config = {
         Dialog
     ]
 };
-var game = new Phaser.Game(config);

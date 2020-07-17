@@ -53,13 +53,21 @@ var Principal = new Phaser.Class({
 
         var monster = map.createFromObjects('obsta', 'monster')
 
-        var chest = map.createFromObjects('object', 'chest')
+        var chest = map.createFromObjects('object', 'chest', {key: 'chest'})
         
         var wizard = map.createFromObjects('npc', 'wizard')
         var smith = map.createFromObjects('npc', 'smith', {flipX: true})
 
-        var iron = map.createFromObjects('item', 'iron')
-        var plant = map.createFromObjects('item', 'plant')
+        var iron = map.createFromObjects('item', 'iron', {key: 'iron'})
+        var plant = map.createFromObjects('item', 'plant', {key: 'plant'})
+        console.log(plant)
+
+        var npc = this.add.group()
+        var obstacles = this.add.group()
+        var items = this.add.group()
+        var objects = this.add.group()
+
+        console.log(items)
 
         // colisiones con la capa de muros
         wall.setCollisionByExclusion([-1]);
@@ -131,11 +139,14 @@ var Principal = new Phaser.Class({
         this.anims.play('wiz', wizard)
         this.anims.play('smi', smith)
         this.anims.play('chs', chest)
-        this.add.image('iron')
-        this.add.image('plant')
 
         // colision del jugador con los muros
         this.physics.add.collider(this.player, wall);
+
+        this.physics.add.collider(this.player, npc);
+        this.physics.add.collider(this.player, obstacles);
+        this.physics.add.collider(this.player, items);
+        this.physics.add.collider(this.player, objects);
 
         // seguimiento de la camara y colision de la misma con los bordes del mapa
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
@@ -235,4 +246,3 @@ var config = {
         Dialog
     ]
 };
-const game = new Phaser.Game(config);

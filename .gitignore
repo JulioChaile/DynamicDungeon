@@ -106,3 +106,7 @@ $RECYCLE.BIN/
 .AppleDB
 .AppleDesktop
 .apdisk
+
+# keystore android
+keystore.jks
+upload_certificate.pem

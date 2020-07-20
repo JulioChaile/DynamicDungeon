@@ -60,15 +60,9 @@ var Principal = new Phaser.Class({
 
         var iron = map.createFromObjects('item', 'iron', {key: 'iron'})
         var plant = map.createFromObjects('item', 'plant', {key: 'plant'})
-        console.log(plant)
 
-        var npc = this.add.group()
-        var obstacles = this.add.group()
-        var items = this.add.group()
-        var objects = this.add.group()
-
-        console.log(items)
-
+        //var group = this.physics.add.staticGroup([monster, chest, wizard, smith, iron, plant], 1)
+        
         // colisiones con la capa de muros
         wall.setCollisionByExclusion([-1]);
 
@@ -143,11 +137,25 @@ var Principal = new Phaser.Class({
         // colision del jugador con los muros
         this.physics.add.collider(this.player, wall);
 
-        this.physics.add.collider(this.player, npc);
-        this.physics.add.collider(this.player, obstacles);
-        this.physics.add.collider(this.player, items);
-        this.physics.add.collider(this.player, objects);
+        //this.physics.world.enable(group, 1)
+        
+        this.physics.world.enable(monster, 1)
+        this.physics.world.enable(wizard, 1)
+        this.physics.world.enable(plant, 1)
+        this.physics.world.enable(iron, 1)
+        this.physics.world.enable(smith, 1)
+        this.physics.world.enable(chest,1)
+        
+        this.physics.add.collider(this.player, wizard);
+        this.physics.add.collider(this.player, chest);
+        this.physics.add.collider(this.player, plant);
+        this.physics.add.collider(this.player, iron);
+        this.physics.add.collider(this.player, monster);
+        this.physics.add.collider(this.player, smith);
+        
 
+        //this.physics.add.collider(this.player, group)
+        
         // seguimiento de la camara y colision de la misma con los bordes del mapa
         this.cameras.main.setBounds(0, 0, map.widthInPixels, map.heightInPixels);
         this.cameras.main.startFollow(this.player);
@@ -157,6 +165,7 @@ var Principal = new Phaser.Class({
     update: function() {
         // deja quieto al jugador
         this.player.body.setVelocity(0);
+
 
         // Horizontal movement
         if (this.cursors.left.isDown)
@@ -238,7 +247,7 @@ var config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            debug: false
+            debug: true
         }
     },
     scene: [

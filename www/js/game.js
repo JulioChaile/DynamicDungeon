@@ -1,4 +1,5 @@
 import Principal from './scenes/Principal.js'
+import Bootloader from './Bootloader.js'
 
 var config = {
     type: Phaser.AUTO,
@@ -15,6 +16,7 @@ var config = {
         }
     },
     scene: [
+        Bootloader,
         Principal
     ]
 };

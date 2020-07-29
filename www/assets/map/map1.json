@@ -62,7 +62,7 @@
                  "point":true,
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":368.051,
                  "y":288.049
@@ -87,7 +87,7 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":449.723666666667,
+                 "x":449.724,
                  "y":288.424
                 }, 
                 {
@@ -146,7 +146,7 @@
                  "visible":true,
                  "width":0,
                  "x":240.09,
-                 "y":416.0525
+                 "y":416.053
                 }, 
                 {
                  "height":0,

@@ -7,6 +7,10 @@ export default class Bootloader extends Phaser.Scene {
         this.load.image('floor', 'assets/dungeon.png');
         this.load.image('wall', 'assets/dungeon.png');
 
+        // font
+        this.load.image('font', 'assets/font/font.png');
+        this.load.json('fontConfig', 'assets/font/font.json');
+
         // map tiles
         this.load.image('tiles', 'assets/map/dungeon.png');
         
@@ -33,7 +37,12 @@ export default class Bootloader extends Phaser.Scene {
         this.load.image('sword', 'assets/item/sword.png')
         this.load.spritesheet('potions', 'assets/item/potions.png', {frameWidth: 16, frameHeight: 16})
 
+        // dialogue
+        this.load.image('dialog', 'assets/dialog/dialog.png')
+
         this.load.on('complete', () => {
+            const fontConfig = this.cache.json.get('fontConfig');
+            this.cache.bitmapFont.add('pixelFont', Phaser.GameObjects.RetroFont.Parse(this, fontConfig));
             this.scene.start('Principal');
         });
     }

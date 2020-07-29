@@ -74,7 +74,7 @@
   <object id="19" name="monster" x="192" y="144">
    <point/>
   </object>
-  <object id="21" name="crack" x="368.051" y="288.049">
+  <object id="21" name="crack" x="368.051" y="288.049" visible="0">
    <point/>
   </object>
  </objectgroup>

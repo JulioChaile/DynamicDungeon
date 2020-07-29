@@ -1,3 +1,5 @@
-const sceneEvents = new Phaser.Events.EventEmitter()
+//import Phaser from 'phaser'
 
-export default sceneEvents
+var emitter = new Phaser.Events.EventEmitter();
+
+export default emitter

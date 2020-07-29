@@ -40,6 +40,9 @@ export default class Bootloader extends Phaser.Scene {
         // dialogue
         this.load.image('dialog', 'assets/dialog/dialog.png')
 
+        // inventary
+        this.load.image('inventary', 'assets/inventary/inventary.png')
+
         this.load.on('complete', () => {
             const fontConfig = this.cache.json.get('fontConfig');
             this.cache.bitmapFont.add('pixelFont', Phaser.GameObjects.RetroFont.Parse(this, fontConfig));

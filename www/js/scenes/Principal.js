@@ -6,6 +6,7 @@ import Plant from '../items/Plant.js'
 import Iron from '../items/Iron.js'
 import Monster from '../obstacles/Monster.js'
 import Crack from '../obstacles/Crack.js'
+//import emitter from "../events/EventsCenter.js";
 
 // escena principal, se carga el this.mapa con todo en el
 class Principal extends Phaser.Scene {
@@ -13,9 +14,13 @@ class Principal extends Phaser.Scene {
         super({key: 'Principal'})
     }
 
+    init() {
+        this.scene.launch('UI')
+    }
+
     create() {
         // se crea el this.mapa desde el JSON cargado en preload
-        this.map = this.make.tilemap({ key: 'map' });
+        this.map = this.make.tilemap({ key: 'map'});
 
         // se cargan los patrones del this.mapa
         var tiles = this.map.addTilesetImage('dungeon', 'tiles');
@@ -64,8 +69,8 @@ class Principal extends Phaser.Scene {
             physicsWorld: this.physics.world,
             scene: this,
             children: this.map.createFromObjects('item', 'plant', {key: 'plant'})
-        });
-        
+        });       
+
         // colisiones con la capa de muros
         wall.setCollisionByExclusion([-1]);
 
@@ -85,16 +90,11 @@ class Principal extends Phaser.Scene {
 
         this.physics.add.collider(this.player, this.plant, () => {
             this.player.checkCollision()
-            this.player.on('action', () => {
+            this.player.once('action', () => {
                 this.scene.pause()
                 this.scene.launch('Dialog', {text: this.plant.dialog(), checkItem: true, item: this.plant.addItem()})
                 this.plant.erased()
                 this.player.removeListener('action')
-            })
-            this.events.on('finish', () => {
-                this.scene.pause()
-                this.scene.launch('Dialog', {text: this.plant.addItem()})
-                this.player.removeListener('finish')
             })
         });
 
@@ -148,7 +148,7 @@ class Principal extends Phaser.Scene {
         
         // seguimiento de la camara y colision de la misma con los bordes del this.mapa
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
-        this.cameras.main.startFollow(this.player);
+        this.cameras.main.startFollow(this.player).setSize(160, 160)
         this.cameras.main.roundPixels = true;
     }
 

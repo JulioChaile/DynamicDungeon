@@ -12,4 +12,37 @@ export default class Iron extends Phaser.Physics.Arcade.StaticGroup {
         
         this.add(this.iron)
     }
+
+    erased() {
+        this.scene.physics.world.disable(this.iron)
+        this.iron.setScale(0)
+    }
+
+    dialog() {
+        const txt = {
+            text: 'Un trozo de hierro',
+            style: {
+                fontFamily: 'ArialBlack', 
+                fontSize: '10px', 
+                align: 'center', 
+                fontStyle: 'bold'
+            }
+        }
+
+        return txt
+    }
+
+    addItem() {
+        const txt = {
+            text: 'El hierro ha sido\nagregado a tu inventario',
+            style: {
+                fontFamily: 'ArialBlack', 
+                fontSize: '10px', 
+                align: 'center', 
+                fontStyle: 'bold'
+            }
+        }
+
+        return txt
+    }
 }

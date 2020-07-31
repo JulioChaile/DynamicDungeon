@@ -1,3 +1,5 @@
+import emitter from "../events/EventsCenter.js";
+
 export default class Knight extends Phaser.GameObjects.Sprite {
     constructor(config) {
         super(config.scene, config.x, config.y, 'player')
@@ -57,7 +59,7 @@ export default class Knight extends Phaser.GameObjects.Sprite {
 
         // interacciones con objetos del mapa
         if (this.cursors.space.isDown && this.check) {
-            this.emit('action')
+            emitter.emit('action')
         }
 
         // Horizontal movement

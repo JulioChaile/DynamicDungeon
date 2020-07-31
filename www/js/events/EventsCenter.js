@@ -1,5 +1,3 @@
-//import Phaser from 'phaser'
-
-var emitter = new Phaser.Events.EventEmitter();
+var emitter = new Phaser.EventEmitter();
 
 export default emitter

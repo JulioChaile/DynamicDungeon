@@ -42,6 +42,7 @@ export default class Bootloader extends Phaser.Scene {
 
         // inventary
         this.load.image('inventary', 'assets/inventary/inventary.png')
+        this.load.image('inventarytxt', 'assets/inventary/generatedtext.png')
 
         this.load.on('complete', () => {
             const fontConfig = this.cache.json.get('fontConfig');

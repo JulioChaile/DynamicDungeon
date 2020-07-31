@@ -6,7 +6,7 @@ import Plant from '../items/Plant.js'
 import Iron from '../items/Iron.js'
 import Monster from '../obstacles/Monster.js'
 import Crack from '../obstacles/Crack.js'
-//import emitter from "../events/EventsCenter.js";
+import emitter from "../events/EventsCenter.js"
 
 // escena principal, se carga el this.mapa con todo en el
 class Principal extends Phaser.Scene {
@@ -19,7 +19,7 @@ class Principal extends Phaser.Scene {
     }
 
     create() {
-        // se crea el this.mapa desde el JSON cargado en preload
+        // se crea el mapa desde el JSON cargado en preload
         this.map = this.make.tilemap({ key: 'map'});
 
         // se cargan los patrones del this.mapa
@@ -90,59 +90,58 @@ class Principal extends Phaser.Scene {
 
         this.physics.add.collider(this.player, this.plant, () => {
             this.player.checkCollision()
-            this.player.once('action', () => {
+            emitter.on('action', () => {
                 this.scene.pause()
                 this.scene.launch('Dialog', {text: this.plant.dialog(), checkItem: true, item: this.plant.addItem()})
                 this.plant.erased()
-                this.player.removeListener('action')
+                emitter.removeAllListeners()
             })
         });
 
         this.physics.add.collider(this.player, this.wizard, () => {
             this.player.checkCollision()
-            this.player.on('action', () => {
-                console.log('wizard')
-                this.player.removeListener('action')
+            emitter.on('action', () => {
+                emitter.removeAllListeners()
             })
         });
 
         this.physics.add.collider(this.player, this.crack, () => {
             this.player.checkCollision()
-            this.player.on('action', () => {
-                this.player.removeListener('action')
+            emitter.on('action', () => {
+                emitter.removeAllListeners()
             })
         });
 
         this.physics.add.collider(this.player, this.iron, () => {
             this.player.checkCollision()
-            this.player.on('action', () => {
+            emitter.on('action', () => {
                 console.log('iron')
-                this.player.removeListener('action')
+                emitter.removeAllListeners()
             })
         });
 
         this.physics.add.collider(this.player, this.smith, () => {
             this.player.checkCollision()
-            this.player.on('action', () => {
+            emitter.on('action', () => {
                 console.log('smith')
-                this.player.removeListener('action')
+                emitter.removeAllListeners()
             })
         });
 
         this.physics.add.collider(this.player, this.monster, () => {
             this.player.checkCollision()
-            this.player.on('action', () => {
+            emitter.on('action', () => {
                 console.log('monster')
-                this.player.removeListener('action')
+                emitter.removeAllListeners()
             })
             
         });
 
         this.physics.add.collider(this.player, this.chest, () => {
             this.player.checkCollision()
-            this.player.on('action', () => {
+            emitter.on('action', () => {
                 console.log('chest')
-                this.player.removeListener('action')
+                emitter.removeAllListeners()
             })
         });
         

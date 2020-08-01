@@ -58,7 +58,7 @@ export default class Knight extends Phaser.GameObjects.Sprite {
         this.body.setVelocity(0);
 
         // interacciones con objetos del mapa
-        if (this.cursors.space.isDown && this.check) {
+        if (Phaser.Input.Keyboard.JustDown(this.cursors.space) && this.check) {
             emitter.emit('action')
         }
 
@@ -109,6 +109,7 @@ export default class Knight extends Phaser.GameObjects.Sprite {
  
         if (this.cursors.up.isDown || this.cursors.down.isDown || this.cursors.left.isDown || this.cursors.right.isDown) {
             this.check = false
+            emitter.removeListener('action')
         }
     }
 }

@@ -8,6 +8,12 @@ export default class Dialog extends Phaser.Scene {
     }
 
     create(data) {
+        if (data.item) {
+            this.checkItem = true 
+        } else {
+            this.checkItem = false
+        }
+
         var dialog = this.add.image(80, 120, 'dialog').setScale(0)
 
         var text = this.add.text(80, 120, data.text.text, data.text.style).setOrigin(0.5).setScale(0)
@@ -16,7 +22,7 @@ export default class Dialog extends Phaser.Scene {
             targets: dialog,
             scaleX: 0.2,
             scaleY: 0.2,
-            duration: 1000,
+            duration: 500,
             ease: 'Bounce'
         })
 
@@ -24,7 +30,7 @@ export default class Dialog extends Phaser.Scene {
             targets: text,
             scaleX: 1,
             scaleY: 1,
-            duration: 1000,
+            duration: 500,
             ease: 'Bounce'
         })
 
@@ -33,13 +39,15 @@ export default class Dialog extends Phaser.Scene {
                 targets: [dialog, text],
                 scaleX: 0,
                 scaleY: 0,
-                duration: 1000,
+                duration: 500,
                 ease: 'Bounce',
                 onComplete: () => {
-                    if (data.checkItem === true) {
+                    if (this.checkItem === true) {
                         this.addItem(data)
                     } else {
                         this.scene.resume('Principal');
+                        this.scene.sleep()
+                        this.input.removeListener('pointerup')
                     }
                 }
             });
@@ -47,7 +55,6 @@ export default class Dialog extends Phaser.Scene {
     }
 
     addItem(data) {
-
         var dialog = this.add.image(80, 120, 'dialog').setScale(0)
 
         var text = this.add.text(80, 120, data.item.text, data.item.style).setOrigin(0.5).setScale(0)
@@ -56,7 +63,7 @@ export default class Dialog extends Phaser.Scene {
             targets: dialog,
             scaleX: 0.2,
             scaleY: 0.2,
-            duration: 1000,
+            duration: 500,
             ease: 'Bounce'
         })
 
@@ -64,20 +71,22 @@ export default class Dialog extends Phaser.Scene {
             targets: text,
             scaleX: 1,
             scaleY: 1,
-            duration: 1000,
+            duration: 500,
             ease: 'Bounce'
         })
 
         this.input.on('pointerup', () => {
-            data.checkItem = false
+            this.input.removeListener('pointerup')
+            this.checkItem = false
             this.add.tween({
                 targets: [dialog, text],
                 scaleX: 0,
                 scaleY: 0,
-                duration: 1000,
+                duration: 500,
                 ease: 'Bounce',
                 onComplete: () => {
-                        this.scene.resume('Principal');
+                    this.scene.resume('Principal');
+                    this.scene.sleep()
                 }
             });
         });

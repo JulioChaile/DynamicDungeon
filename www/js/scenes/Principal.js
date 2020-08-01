@@ -86,37 +86,40 @@ class Principal extends Phaser.Scene {
         this.physics.world.bounds.height = this.map.heightInPixels;
 
         // colision del jugador con los muros
-        this.physics.add.collider(this.player, wall);
+        //this.physics.add.collider(this.player, wall);
 
+        // colisiones con los diferentes objetos del mapa
         this.physics.add.collider(this.player, this.plant, () => {
             this.player.checkCollision()
             emitter.on('action', () => {
                 this.scene.pause()
-                this.scene.launch('Dialog', {text: this.plant.dialog(), checkItem: true, item: this.plant.addItem()})
+                this.scene.launch('Dialog', {text: this.plant.dialog(), item: this.plant.addItem()})
                 this.plant.erased()
-                emitter.removeAllListeners()
+                emitter.removeListener('action')
             })
         });
 
         this.physics.add.collider(this.player, this.wizard, () => {
             this.player.checkCollision()
             emitter.on('action', () => {
-                emitter.removeAllListeners()
+                emitter.removeListener('action')
             })
         });
 
         this.physics.add.collider(this.player, this.crack, () => {
             this.player.checkCollision()
             emitter.on('action', () => {
-                emitter.removeAllListeners()
+                emitter.removeListener('action')
             })
         });
 
         this.physics.add.collider(this.player, this.iron, () => {
             this.player.checkCollision()
             emitter.on('action', () => {
-                console.log('iron')
-                emitter.removeAllListeners()
+                this.scene.pause()
+                this.scene.launch('Dialog', {text: this.iron.dialog(), item: this.iron.addItem()})
+                this.iron.erased()
+                emitter.removeListener('action')
             })
         });
 
@@ -124,7 +127,7 @@ class Principal extends Phaser.Scene {
             this.player.checkCollision()
             emitter.on('action', () => {
                 console.log('smith')
-                emitter.removeAllListeners()
+                emitter.removeListener('action')
             })
         });
 
@@ -132,7 +135,7 @@ class Principal extends Phaser.Scene {
             this.player.checkCollision()
             emitter.on('action', () => {
                 console.log('monster')
-                emitter.removeAllListeners()
+                emitter.removeListener('action')
             })
             
         });
@@ -141,7 +144,7 @@ class Principal extends Phaser.Scene {
             this.player.checkCollision()
             emitter.on('action', () => {
                 console.log('chest')
-                emitter.removeAllListeners()
+                emitter.removeListener('action')
             })
         });
         

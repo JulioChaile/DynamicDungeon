@@ -1,3 +1,5 @@
+import emitter from "../events/EventsCenter.js"
+
 export default class Iron extends Phaser.Physics.Arcade.StaticGroup {
     constructor(config) {
         super(config.phisicsWorld, config.scene)
@@ -42,6 +44,21 @@ export default class Iron extends Phaser.Physics.Arcade.StaticGroup {
                 fontStyle: 'bold'
             }
         }
+
+        const item = {
+            key: 'iron',
+            name: '- Trozo de hierro',
+            detail: 'Un buen herroro podria\nhacer maravillas con esto.',
+            event: 'smith',
+            style: {
+                fontFamily: 'ArialBlack', 
+                fontSize: '10px', 
+                align: 'left', 
+                fontStyle: 'bold'
+            }
+        }
+
+        emitter.emit('addItem', item)
 
         return txt
     }

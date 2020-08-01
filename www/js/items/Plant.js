@@ -1,3 +1,5 @@
+import emitter from "../events/EventsCenter.js"
+
 export default class Plant extends Phaser.Physics.Arcade.StaticGroup {
     constructor(config) {
         super(config.phisicsWorld, config.scene)
@@ -39,6 +41,21 @@ export default class Plant extends Phaser.Physics.Arcade.StaticGroup {
                 fontStyle: 'bold'
             }
         }
+
+        const item = {
+            key: 'plant',
+            name: '- Planta misteriosa',
+            detail: 'Este tipo de planta normalmente\nse usa en hechizos y pociones',
+            event: 'wizard',
+            style: {
+                fontFamily: 'ArialBlack', 
+                fontSize: '10px', 
+                align: 'left', 
+                fontStyle: 'bold'
+            }
+        }
+
+        emitter.emit('addItem', item)
 
         return txt
     }

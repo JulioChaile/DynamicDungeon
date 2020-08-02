@@ -17,7 +17,7 @@ export default class Bootloader extends Phaser.Scene {
         // map in json format
         this.load.tilemapTiledJSON('map', 'assets/map/map1.json');
         
-        // our two characters
+        // our character
         this.load.spritesheet('player', 'assets/dude.png', { frameWidth: 16, frameHeight: 27 });
 
         // objects
@@ -35,14 +35,17 @@ export default class Bootloader extends Phaser.Scene {
         this.load.image('iron', 'assets/item/iron.png')
         this.load.image('plant', 'assets/item/plant.png')
         this.load.image('sword', 'assets/item/sword.png')
-        this.load.spritesheet('potions', 'assets/item/potions.png', {frameWidth: 16, frameHeight: 16})
+        this.load.image('potion', 'assets/item/potion.png')
+        this.load.json('items', 'json/items.json')
 
         // dialogue
         this.load.image('dialog', 'assets/dialog/dialog.png')
 
         // inventary
         this.load.image('inventary', 'assets/inventary/inventary.png')
+        this.load.image('fullInventary', 'assets/inventary/fullInventary.png')
         this.load.image('inventarytxt', 'assets/inventary/tittle.png')
+        this.load.image('eye', 'assets/inventary/eye.png')
 
         this.load.on('complete', () => {
             const fontConfig = this.cache.json.get('fontConfig');

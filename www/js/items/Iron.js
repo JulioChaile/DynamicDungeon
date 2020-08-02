@@ -27,7 +27,7 @@ export default class Iron extends Phaser.Physics.Arcade.StaticGroup {
                 fontFamily: 'ArialBlack', 
                 fontSize: '10px', 
                 align: 'center', 
-                fontStyle: 'bold'
+                //fontStyle: 'bold'
             }
         }
 
@@ -41,7 +41,7 @@ export default class Iron extends Phaser.Physics.Arcade.StaticGroup {
                 fontFamily: 'ArialBlack', 
                 fontSize: '10px', 
                 align: 'center', 
-                fontStyle: 'bold'
+                //fontStyle: 'bold'
             }
         }
 
@@ -54,7 +54,7 @@ export default class Iron extends Phaser.Physics.Arcade.StaticGroup {
                 fontFamily: 'ArialBlack', 
                 fontSize: '10px', 
                 align: 'left', 
-                fontStyle: 'bold'
+                //fontStyle: 'bold'
             }
         }
 

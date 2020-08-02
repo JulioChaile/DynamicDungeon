@@ -19,6 +19,9 @@ class Principal extends Phaser.Scene {
     }
 
     create() {
+        // modo debug
+        this.modoDebug()
+
         // se crea el mapa desde el JSON cargado en preload
         this.map = this.make.tilemap({ key: 'map'});
 
@@ -86,7 +89,7 @@ class Principal extends Phaser.Scene {
         this.physics.world.bounds.height = this.map.heightInPixels;
 
         // colision del jugador con los muros
-        //this.physics.add.collider(this.player, wall);
+        this.collider = this.physics.add.collider(this.player, wall);
 
         // colisiones con los diferentes objetos del mapa
         this.physics.add.collider(this.player, this.plant, () => {
@@ -156,6 +159,22 @@ class Principal extends Phaser.Scene {
 
     update() {
         this.player.update()
+    }
+
+    modoDebug() {
+        //  37 = LEFT
+        //  38 = UP
+        //  39 = RIGHT
+        //  40 = DOWN
+
+        // Arriba, Arriba, Abajo, Abajo, Izquierda, Derecha, Izquierda, Derecha
+        const debug = this.input.keyboard.createCombo([ 38, 38, 40, 40, 37, 39, 37, 39], { resetOnMatch: true });
+
+        this.input.keyboard.on('keycombomatch', () => {
+            console.log('Konami Code entered!');
+            this.physics.world.removeCollider(this.collider)
+            emitter.emit('debug')
+        });
     }
 };
 

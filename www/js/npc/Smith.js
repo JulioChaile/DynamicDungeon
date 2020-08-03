@@ -14,6 +14,13 @@ export default class Smith extends Phaser.Physics.Arcade.StaticGroup {
         this.add(this.smith)
     }
 
+    // Retorna la key del objeto
+    colissionKey() {
+        const key = this.getChildren()[0].name
+        
+        return key
+    }
+
     createAnim(config) {
         config.scene.anims.create({
             key: 'smi',

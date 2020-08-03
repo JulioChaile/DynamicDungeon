@@ -95,7 +95,7 @@ class Principal extends Phaser.Scene {
 
         // Colisiones con los diferentes objetos del mapa
         this.physics.add.collider(this.player, this.plant, () => {
-            this.player.checkCollision()
+            this.player.checkCollision(this.plant.colissionKey())
             emitter.on('action', () => {
                 this.scene.pause()
                 this.scene.launch('Dialog', {
@@ -110,8 +110,12 @@ class Principal extends Phaser.Scene {
         });
 
         this.physics.add.collider(this.player, this.wizard, () => {
-            this.player.checkCollision()
+            this.player.checkCollision(this.wizard.colissionKey())
             emitter.on('action', () => {
+                this.scene.pause()
+                
+                this.wizard.dialog()
+
                 emitter.removeListener('action')
             })
         });

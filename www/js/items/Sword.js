@@ -21,6 +21,13 @@ export default class Sword extends Phaser.Physics.Arcade.StaticGroup {
         this.add(this.sword)
     }
 
+    // Retorna la key del objeto
+    colissionKey() {
+        const key = this.getChildren()[0].name
+        
+        return key
+    }
+
     // Elimina el objeto del mapa
     erased() {
         this.scene.physics.world.disable(this.sword)

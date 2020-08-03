@@ -17,11 +17,16 @@ export default class Knight extends Phaser.GameObjects.Sprite {
 
         this.check = false
         
+        emitter.on('use',  item => {
+                this.useItem(item)
+        })
     }
 
     // cheackea que se esta colisionando con un objeto
-    checkCollision() {
+    checkCollision(key) {
         this.check = true
+
+        this.collissionKey = key
     }
 
     createAnim() {
@@ -51,6 +56,30 @@ export default class Knight extends Phaser.GameObjects.Sprite {
             frameRate: 10,
             repeat: -1
         });
+    }
+
+    useItem(item) {
+        const text = {
+            text: 'No parece ser el\nmomento para usar esto.',
+            style: {
+                fontFamily: 'ArialBlack', 
+                fontSize: '10px', 
+                align: 'left', 
+                //fontStyle: 'bold'
+            }
+        }
+
+        console.log(item, this.collissionKey)
+
+        if(item.event === this.collissionKey) {
+            console.log('emitido')
+            emitter.emit(item.event, item)
+        } else {
+            console.log(this.scene)
+            this.scene.scene.launch('Dialog', {
+                text: text
+            })
+        }
     }
 
     update() {
@@ -109,7 +138,10 @@ export default class Knight extends Phaser.GameObjects.Sprite {
  
         if (this.cursors.up.isDown || this.cursors.down.isDown || this.cursors.left.isDown || this.cursors.right.isDown) {
             this.check = false
+
             emitter.removeListener('action')
+
+            this.collisionKey = ''
         }
     }
 }

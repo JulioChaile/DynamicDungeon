@@ -25,6 +25,13 @@ export default class Iron extends Phaser.Physics.Arcade.StaticGroup {
         this.add(this.iron)
     }
 
+    // Retorna la key del objeto
+    colissionKey() {
+        const key = this.getChildren()[0].name
+        
+        return key
+    }
+
     // Elimina el objeto del mapa
     erased() {
         this.scene.physics.world.disable(this.iron)
@@ -62,7 +69,7 @@ export default class Iron extends Phaser.Physics.Arcade.StaticGroup {
         const item = {
             key: 'iron',
             name: '- Trozo de hierro',
-            text: 'Un buen herroro podria\nhacer maravillas con esto.',
+            text: 'Un buen herrero podria\nhacer maravillas con esto.',
             event: 'smith',
             style: {
                 fontFamily: 'ArialBlack', 

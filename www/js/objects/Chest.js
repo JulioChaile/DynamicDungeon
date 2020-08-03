@@ -14,6 +14,13 @@ export default class Chest extends Phaser.Physics.Arcade.StaticGroup {
         this.add(this.chest)
     }
 
+    // Retorna la key del objeto
+    colissionKey() {
+        const key = this.getChildren()[0].name
+        
+        return key
+    }
+
     createAnim(config) {
         config.scene.anims.create({
             key: 'chs',

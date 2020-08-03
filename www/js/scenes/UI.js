@@ -35,6 +35,11 @@ export default class UI extends Phaser.Scene {
             this.modoDebug()
             emitter.removeListener()
         })
+
+        // Escuchador para borrar items del inventario
+        emitter.on('erase', item => {
+            this.eraseItem(item)
+        })
     }
 
     update() {
@@ -82,6 +87,11 @@ export default class UI extends Phaser.Scene {
         this.item2 = this.items[1]
         
         if(this.items.length === 1) {
+            if(this.itemSpace1 && this.textSpace1) {
+                this.itemSpace1.destroy()
+                this.textSpace1.destroy()
+            }
+
             this.itemSpace1 = this.add.image(24, this.sys.game.config.height - 40, this.item1.key)
                 .setInteractive()
             this.textSpace1 = this.add.text(36, this.sys.game.config.height - 40, this.item1.name, this.item1.style)
@@ -116,6 +126,8 @@ export default class UI extends Phaser.Scene {
         const text = this.add.text(0, 0, 'Modo Debug\nActivado')
             .setOrigin(0)
         const items = this.cache.json.get('items')
+
+        console.log(items)
 
         this.items = items
         this.addItem(false)
@@ -161,7 +173,7 @@ export default class UI extends Phaser.Scene {
         items.forEach((it, i) => {
             it.on('pointerup', pointer => {
                 if (this.checkShow) {
-                    this.showItem(pointer, this.items[i])
+                    this.showItem(pointer, this.items[i], items, texts)
                     this.checkShow = false
                 }
             })
@@ -174,7 +186,7 @@ export default class UI extends Phaser.Scene {
     }
 
     // Muestra las opciones de un item (Usar, Detalles)
-    showItem(pointer, item) {
+    showItem(pointer, item, items, texts) {
         this.scene.pause('Principal')
 
         // Al ser false evita que se puedan abrir mas ventanas de otros items
@@ -212,8 +224,12 @@ export default class UI extends Phaser.Scene {
                     this.modalItem.destroy()
 
                     if(pointer.y < centerY) {
-                        emitter.emit(item.event)
-                        console.log('usar')
+                        if(this.checkShowInventary) {
+                            this.closedInventory(items, texts)
+                            this.scene.pause('Principal')
+                        }
+
+                        emitter.emit('use', item)
                     } else {
                         this.scene.launch('Dialog', {
                             text: item
@@ -271,5 +287,16 @@ export default class UI extends Phaser.Scene {
         this.checkShowInventary = false
 
         this.scene.resume('Principal')
+    }
+
+    // Borrar items del inventario
+    eraseItem(item) {
+        const index = this.items.findIndex(it => 
+            it.key === item.key
+        )
+
+        this.items.splice(index, 1)
+
+        this.addItem(false)
     }
 }

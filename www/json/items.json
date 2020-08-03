@@ -2,13 +2,13 @@
     {
         "key": "iron",
         "name": "- Trozo de hierro",
-        "text": "Un buen herroro podria\nhacer maravillas con esto.",
+        "text": "Un buen herrero podria\nhacer maravillas con esto.",
         "event": "smith",
         "style": {
             "fontFamily": "ArialBlack", 
             "fontSize": "10px", 
             "align": "left", 
-            "fontstyle": "bold"
+            "//fontstyle": "bold"
         }
     },
     {
@@ -20,7 +20,7 @@
             "fontFamily": "ArialBlack", 
             "fontSize": "10px", 
             "align": "left", 
-            "fontstyle": "bold"
+            "//fontstyle": "bold"
         }
     },
     {
@@ -32,7 +32,7 @@
             "fontFamily": "ArialBlack", 
             "fontSize": "10px", 
             "align": "left", 
-            "fontstyle": "bold"
+            "//fontstyle": "bold"
         }
     },
     {

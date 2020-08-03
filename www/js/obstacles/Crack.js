@@ -9,4 +9,11 @@ export default class crack extends Phaser.Physics.Arcade.StaticGroup {
         
         this.add(this.crack)
     }
+
+    // Retorna la key del objeto
+    colissionKey() {
+        const key = this.getChildren()[0].name
+        
+        return key
+    }
 }

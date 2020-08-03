@@ -21,6 +21,13 @@ export default class Plant extends Phaser.Physics.Arcade.StaticGroup {
         this.add(this.plant)
     }
 
+    // Retorna la key del objeto
+    colissionKey() {
+        const key = this.getChildren()[0].name
+        
+        return key
+    }
+
     // Elimina el objeto del mapa
     erased() {
         this.scene.physics.world.disable(this.plant)
@@ -58,7 +65,7 @@ export default class Plant extends Phaser.Physics.Arcade.StaticGroup {
         const item = {
             key: 'plant',
             name: '- Planta misteriosa',
-            text: 'Este tipo de planta normalmente\nse usa en hechizos y pociones',
+            text: 'Este tipo de planta\nnormalmentese usa en\nhechizos y pociones',
             event: 'wizard',
             style: {
                 fontFamily: 'ArialBlack', 

@@ -14,6 +14,13 @@ export default class Monster extends Phaser.Physics.Arcade.StaticGroup {
         this.add(this.monster)
     }
 
+    // Retorna la key del objeto
+    colissionKey() {
+        const key = this.getChildren()[0].name
+        
+        return key
+    }
+
     createAnim(config) {
         config.scene.anims.create({
             key: 'mons',

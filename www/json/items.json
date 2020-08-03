@@ -2,7 +2,7 @@
     {
         "key": "iron",
         "name": "- Trozo de hierro",
-        "detail": "Un buen herroro podria\nhacer maravillas con esto.",
+        "text": "Un buen herroro podria\nhacer maravillas con esto.",
         "event": "smith",
         "style": {
             "fontFamily": "ArialBlack", 
@@ -14,7 +14,7 @@
     {
         "key": "keyExit",
         "name": "- Llave dorada",
-        "detail": "A un costado se puede\nleer una inscripcion:\n'Libertad'",
+        "text": "A un costado se puede\nleer una inscripcion:\n'Libertad'",
         "event": "exit",
         "style": {
             "fontFamily": "ArialBlack", 
@@ -26,7 +26,7 @@
     {
         "key": "plant",
         "name": "- Planta misteriosa",
-        "detail": "Este tipo de planta normalmente\nse usa en hechizos y pociones",
+        "text": "Este tipo de planta normalmente\nse usa en hechizos y pociones",
         "event": "wizard",
         "style": {
             "fontFamily": "ArialBlack", 
@@ -38,7 +38,7 @@
     {
         "key": "potion",
         "name": "- Pocion misteriosa",
-        "detail": "La unica forma de saber\nque hace es bebiendola",
+        "text": "La unica forma de saber\nque hace es bebiendola",
         "event": "crack",
         "style": {
             "fontFamily": "ArialBlack", 
@@ -50,7 +50,7 @@
     {
         "key": "sword",
         "name": "- Espada de acero",
-        "detail": "El filo de esta espada podria\npartir en dos\na cualquier bestia",
+        "text": "El filo de esta espada podria\npartir en dos\na cualquier bestia",
         "event": "monster",
         "style": {
             "fontFamily": "ArialBlack", 

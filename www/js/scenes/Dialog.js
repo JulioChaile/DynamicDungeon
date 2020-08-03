@@ -1,3 +1,26 @@
+import emitter from "../events/EventsCenter.js"
+
+//Escena usada para las ventanas de dialogo
+//data = {
+//    text: {
+//        text = 'texto a msotrar',
+//        style = {
+//            fontFamily: 'ArialBlack', 
+//            fontSize: '10px', 
+//            align: 'left', 
+//            fontStyle: 'bold'
+//        }
+//    },
+//    item: { (opcional)
+//        text = 'texto a msotrar',
+//        style = {
+//            fontFamily: 'ArialBlack', 
+//            fontSize: '10px', 
+//            align: 'left', 
+//            fontStyle: 'bold'
+//        }
+//    }
+//}
 export default class Dialog extends Phaser.Scene {
     constructor() {
         super({key: 'Dialog'})
@@ -8,16 +31,20 @@ export default class Dialog extends Phaser.Scene {
     }
 
     create(data) {
+        // Checkea si se le envio un item a la escena para msotrar
         if (data.item) {
             this.checkItem = true 
         } else {
             this.checkItem = false
         }
 
+        // Crea la ventan de dialogo
         var dialog = this.add.image(80, 120, 'dialog').setScale(0)
 
+        // Crea el texto dentro de la ventana
         var text = this.add.text(80, 120, data.text.text, data.text.style).setOrigin(0.5).setScale(0)
 
+        // Efecto
         this.add.tween({
             targets: dialog,
             scaleX: 0.2,
@@ -25,7 +52,6 @@ export default class Dialog extends Phaser.Scene {
             duration: 500,
             ease: 'Bounce'
         })
-
         this.add.tween({
             targets: text,
             scaleX: 1,
@@ -34,6 +60,7 @@ export default class Dialog extends Phaser.Scene {
             ease: 'Bounce'
         })
 
+        // Se elimina la ventana de dialogo luego de hacer click en algun punto
         this.input.on('pointerup', () => {
             this.add.tween({
                 targets: [dialog, text],
@@ -43,17 +70,19 @@ export default class Dialog extends Phaser.Scene {
                 ease: 'Bounce',
                 onComplete: () => {
                     if (this.checkItem === true) {
-                        this.addItem(data)
+                        this.addItem(data) // En caso de que se le haya enviado un item
                     } else {
                         this.scene.resume('Principal');
                         this.scene.sleep()
                         this.input.removeListener('pointerup')
+                        emitter.emit('finish')
                     }
                 }
             });
         });
     }
 
+    // Ventana de dialogo de item añadido al inventario
     addItem(data) {
         var dialog = this.add.image(80, 120, 'dialog').setScale(0)
 
@@ -87,6 +116,7 @@ export default class Dialog extends Phaser.Scene {
                 onComplete: () => {
                     this.scene.resume('Principal');
                     this.scene.sleep()
+                    emitter.emit('finish')
                 }
             });
         });

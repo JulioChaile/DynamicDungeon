@@ -19,9 +19,9 @@ var config = {
     },
     scene: [
         Bootloader,
-        Principal,
-        Dialog,
+        Principal,        
         UI,
+        Dialog,
     ]
 };
 

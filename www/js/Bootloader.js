@@ -41,11 +41,13 @@ export default class Bootloader extends Phaser.Scene {
         // dialogue
         this.load.image('dialog', 'assets/dialog/dialog.png')
 
-        // inventary
-        this.load.image('inventary', 'assets/inventary/inventary.png')
-        this.load.image('fullInventary', 'assets/inventary/fullInventary.png')
-        this.load.image('inventarytxt', 'assets/inventary/tittle.png')
-        this.load.image('eye', 'assets/inventary/eye.png')
+        // inventory
+        this.load.image('inventory', 'assets/inventory/inventory.png')
+        this.load.image('fullInventory', 'assets/inventory/fullInventory.png')
+        this.load.image('inventorytxt', 'assets/inventory/tittle.png')
+        this.load.image('eye', 'assets/inventory/eye.png')
+        this.load.image('closed', 'assets/inventory/closed.png')
+        this.load.image('showItem', 'assets/inventory/showItem.png')
 
         this.load.on('complete', () => {
             const fontConfig = this.cache.json.get('fontConfig');

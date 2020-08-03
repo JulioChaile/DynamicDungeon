@@ -8,30 +8,32 @@ import Monster from '../obstacles/Monster.js'
 import Crack from '../obstacles/Crack.js'
 import emitter from "../events/EventsCenter.js"
 
-// escena principal, se carga el this.mapa con todo en el
+// Escena principal, se carga el mapa con todo en el
 class Principal extends Phaser.Scene {
     constructor() {
         super({key: 'Principal'})
     }
 
+    // Se llama a la interfaz de usuario a penas se inicia la escena
     init() {
         this.scene.launch('UI')
     }
 
     create() {
-        // modo debug
+        // Modo Debug
         this.modoDebug()
 
-        // se crea el mapa desde el JSON cargado en preload
+        // Se crea el mapa desde el JSON cargado en preload
         this.map = this.make.tilemap({ key: 'map'});
 
-        // se cargan los patrones del this.mapa
+        // Se cargan los patrones del this.mapa
         var tiles = this.map.addTilesetImage('dungeon', 'tiles');
         
-        //se crean las capas del piso y muros
+        // Se crean las capas del piso y muros
         var floor = this.map.createStaticLayer('floor', tiles, 0, 0);
         var wall = this.map.createStaticLayer('wall', tiles, 0, 0);
 
+        // Se crean los objetos del juego
         this.monster = new Monster ({
             physicsWorld: this.physics.world,
             scene: this,
@@ -74,30 +76,35 @@ class Principal extends Phaser.Scene {
             children: this.map.createFromObjects('item', 'plant', {key: 'plant'})
         });       
 
-        // colisiones con la capa de muros
+        // Colisiones con la capa de muros
         wall.setCollisionByExclusion([-1]);
 
-        // jugador y fisicas
+        // Jugador y fisicas
         this.player = new Knight({
             scene: this,
             x: 120,
             y: 330,
         })
 
-        // se delimitan los limites del mapa y se da la colision con lo mismos (medio al pedo porque hay muros en todos lados)
+        // Se delimitan los limites del mapa y se da la colision con lo mismos (medio al pedo porque hay muros en todos lados)
         this.physics.world.bounds.width = this.map.widthInPixels;
         this.physics.world.bounds.height = this.map.heightInPixels;
 
-        // colision del jugador con los muros
+        // Colision del jugador con los muros
         this.collider = this.physics.add.collider(this.player, wall);
 
-        // colisiones con los diferentes objetos del mapa
+        // Colisiones con los diferentes objetos del mapa
         this.physics.add.collider(this.player, this.plant, () => {
             this.player.checkCollision()
             emitter.on('action', () => {
                 this.scene.pause()
-                this.scene.launch('Dialog', {text: this.plant.dialog(), item: this.plant.addItem()})
+                this.scene.launch('Dialog', {
+                    text: this.plant.dialog(), 
+                    item: this.plant.addItem()
+                })
+
                 this.plant.erased()
+
                 emitter.removeListener('action')
             })
         });
@@ -120,8 +127,13 @@ class Principal extends Phaser.Scene {
             this.player.checkCollision()
             emitter.on('action', () => {
                 this.scene.pause()
-                this.scene.launch('Dialog', {text: this.iron.dialog(), item: this.iron.addItem()})
+                this.scene.launch('Dialog', {
+                    text: this.iron.dialog(), 
+                    item: this.iron.addItem()
+                })
+
                 this.iron.erased()
+
                 emitter.removeListener('action')
             })
         });
@@ -151,7 +163,7 @@ class Principal extends Phaser.Scene {
             })
         });
         
-        // seguimiento de la camara y colision de la misma con los bordes del this.mapa
+        // Seguimiento de la camara y colision de la misma con los bordes del this.mapa
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.cameras.main.startFollow(this.player).setSize(160, 160)
         this.cameras.main.roundPixels = true;
@@ -161,6 +173,7 @@ class Principal extends Phaser.Scene {
         this.player.update()
     }
 
+    // Con el Modo Debug se desactivan las colisiones con los muros y se agregan todos los items al inventario
     modoDebug() {
         //  37 = LEFT
         //  38 = UP

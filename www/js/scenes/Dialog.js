@@ -28,11 +28,11 @@ export default class Dialog extends Phaser.Scene {
 
     init() {
         console.log('la escena se cargo piola')
+        this.scene.pause('UI')
+        this.scene.pause('Principal')
     }
 
     create(data) {
-        this.scene.pause('UI')
-
         // Checkea si se le envio un item a la escena para msotrar
         if (data.item) {
             this.checkItem = true 

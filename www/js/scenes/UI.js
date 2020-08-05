@@ -47,6 +47,7 @@ export default class UI extends Phaser.Scene {
         // Interaccion con los items en la caja de inventario inferior
         if(this.itemSpace1) {
             this.itemSpace1.on('pointerup', pointer => {
+                this.itemSpace1.removeAllListeners()
                 if (this.checkShow) {
                     this.scene.pause('Principal')
                     this.showItem(pointer, this.items[0])
@@ -56,6 +57,7 @@ export default class UI extends Phaser.Scene {
         }
         if(this.itemSpace2) {
             this.itemSpace2.on('pointerup', pointer => {
+                this.itemSpace2.removeAllListeners()
                 if (this.checkShow) {
                     this.scene.pause('Principal')
                     this.showItem(pointer, this.items[1])
@@ -110,13 +112,18 @@ export default class UI extends Phaser.Scene {
         console.log(this.item1)
 
         if(this.items.length === 0) {
+            console.log('entra aca')
             if(this.itemSpace1 && this.textSpace1) {
+                console.log('y aca')
                 this.itemSpace1.destroy()
                 this.textSpace1.destroy()
             }
         }
 
+        console.log('salio')
+
         if(this.items.length === 1) {
+            console.log('pero entro aca')
             if(this.itemSpace1 && this.textSpace1) {
                 this.itemSpace1.destroy()
                 this.textSpace1.destroy()
@@ -130,6 +137,7 @@ export default class UI extends Phaser.Scene {
         }
 
         if (this.items.length > 1) {
+            console.log('tambie aca')
             if(this.itemSpace1 && this.textSpace1) {
                 this.itemSpace1.destroy()
                 this.textSpace1.destroy()
@@ -151,9 +159,8 @@ export default class UI extends Phaser.Scene {
                 .setDepth(0)
             this.textSpace2 = this.add.text(36, this.sys.game.config.height - 24, this.item2.name, this.item2.style)
                 .setOrigin(0, 0.5)
-        }
-
-        
+        }        
+        console.log('y sigue saliendo')
     }
 
     // Agrega todos los items al inventario

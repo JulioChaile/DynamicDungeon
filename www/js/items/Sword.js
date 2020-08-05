@@ -65,12 +65,12 @@ export default class Sword extends Phaser.Physics.Arcade.StaticGroup {
         const item = {
             key: 'sword',
             name: '- Espada de hierro',
-            text: 'El filo de esta espada podria\npartir en dos\na cualquier bestia',
+            text: 'El filo de esta espada\npodria partir en dos\na cualquier bestia',
             event: 'monster',
             style: {
                 fontFamily: 'ArialBlack', 
                 fontSize: '10px', 
-                align: 'left', 
+                align: 'center', 
                 //fontStyle: 'bold'
             }
         }

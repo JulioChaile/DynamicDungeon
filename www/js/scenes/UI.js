@@ -19,6 +19,7 @@ export default class UI extends Phaser.Scene {
         // Boton para mostrar el inventario completo
         this.show = this.add.image(this.sys.game.config.width -16, this.sys.game.config.height - 16, 'eye')
             .setInteractive()
+            .setDepth(0)
 
         // Escuchador del boton "show"
         this.show.on('pointerup', () => {
@@ -66,6 +67,26 @@ export default class UI extends Phaser.Scene {
         // Checkea si esta abierto el inventario completo y pausa la escena Principal si es asi
         if (this.checkShowInventary) {
             this.scene.pause('Principal')
+
+            if(this.itemSpace1) {
+                this.itemSpace1.input.enabled = false
+            }
+
+            if(this.itemSpace2) {
+                this.itemSpace2.input.enabled = false
+            }
+
+            this.show.input.enabled = false
+        } else {
+            if(this.itemSpace1) {
+                this.itemSpace1.setInteractive()
+            }
+
+            if(this.itemSpace2) {
+                this.itemSpace2.setInteractive()
+            }
+
+            this.show.setInteractive()
         }
     }
 
@@ -85,7 +106,16 @@ export default class UI extends Phaser.Scene {
 
         this.item1 = this.items[0]
         this.item2 = this.items[1]
-        
+
+        console.log(this.item1)
+
+        if(this.items.length === 0) {
+            if(this.itemSpace1 && this.textSpace1) {
+                this.itemSpace1.destroy()
+                this.textSpace1.destroy()
+            }
+        }
+
         if(this.items.length === 1) {
             if(this.itemSpace1 && this.textSpace1) {
                 this.itemSpace1.destroy()
@@ -94,6 +124,7 @@ export default class UI extends Phaser.Scene {
 
             this.itemSpace1 = this.add.image(24, this.sys.game.config.height - 40, this.item1.key)
                 .setInteractive()
+                .setDepth(0)
             this.textSpace1 = this.add.text(36, this.sys.game.config.height - 40, this.item1.name, this.item1.style)
                 .setOrigin(0, 0.5)
         }
@@ -111,20 +142,25 @@ export default class UI extends Phaser.Scene {
 
             this.itemSpace1 = this.add.image(24, this.sys.game.config.height - 40, this.item1.key)
                 .setInteractive()
+                .setDepth(0)
             this.textSpace1 = this.add.text(36, this.sys.game.config.height - 40, this.item1.name, this.item1.style)
                 .setOrigin(0, 0.5)
 
             this.itemSpace2 = this.add.image(24, this.sys.game.config.height - 24, this.item2.key)
                 .setInteractive()
+                .setDepth(0)
             this.textSpace2 = this.add.text(36, this.sys.game.config.height - 24, this.item2.name, this.item2.style)
                 .setOrigin(0, 0.5)
         }
+
+        
     }
 
     // Agrega todos los items al inventario
     modoDebug(){
         const text = this.add.text(0, 0, 'Modo Debug\nActivado')
             .setOrigin(0)
+
         const items = this.cache.json.get('items')
 
         console.log(items)
@@ -297,6 +333,8 @@ export default class UI extends Phaser.Scene {
 
         this.items.splice(index, 1)
 
-        this.addItem(false)
+        console.log(this.items)
+
+        this.inventory()
     }
 }

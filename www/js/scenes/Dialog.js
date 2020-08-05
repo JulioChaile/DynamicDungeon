@@ -31,6 +31,8 @@ export default class Dialog extends Phaser.Scene {
     }
 
     create(data) {
+        this.scene.pause('UI')
+
         // Checkea si se le envio un item a la escena para msotrar
         if (data.item) {
             this.checkItem = true 
@@ -73,6 +75,7 @@ export default class Dialog extends Phaser.Scene {
                         this.addItem(data) // En caso de que se le haya enviado un item
                     } else {
                         this.scene.resume('Principal');
+                        this.scene.resume('UI');
                         this.scene.sleep()
                         this.input.removeListener('pointerup')
                         emitter.emit('finish')
@@ -115,6 +118,7 @@ export default class Dialog extends Phaser.Scene {
                 ease: 'Bounce',
                 onComplete: () => {
                     this.scene.resume('Principal');
+                    this.scene.resume('UI');
                     this.scene.sleep()
                     emitter.emit('finish')
                 }

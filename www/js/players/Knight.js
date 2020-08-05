@@ -82,6 +82,13 @@ export default class Knight extends Phaser.GameObjects.Sprite {
         }
     }
 
+    block() {
+        this.cursors.left.isDown = false
+        this.cursors.right.isDown = false
+        this.cursors.up.isDown = false
+        this.cursors.down.isDown = false
+    }
+
     update() {
         // deja quieto al jugador
         this.body.setVelocity(0);

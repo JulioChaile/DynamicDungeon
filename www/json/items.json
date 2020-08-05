@@ -8,7 +8,7 @@
             "fontFamily": "ArialBlack", 
             "fontSize": "10px", 
             "align": "left", 
-            "//fontstyle": "bold"
+            "fontstyle": "bold"
         }
     },
     {
@@ -20,7 +20,7 @@
             "fontFamily": "ArialBlack", 
             "fontSize": "10px", 
             "align": "left", 
-            "//fontstyle": "bold"
+            "fontstyle": "bold"
         }
     },
     {
@@ -32,7 +32,7 @@
             "fontFamily": "ArialBlack", 
             "fontSize": "10px", 
             "align": "left", 
-            "//fontstyle": "bold"
+            "fontstyle": "bold"
         }
     },
     {
@@ -49,7 +49,7 @@
     },
     {
         "key": "sword",
-        "name": "- Espada de acero",
+        "name": "- Espada de hierro",
         "text": "El filo de esta espada podria\npartir en dos\na cualquier bestia",
         "event": "monster",
         "style": {

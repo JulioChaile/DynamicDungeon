@@ -4,9 +4,13 @@ import Smith from '../npc/Smith.js'
 import Chest from '../objects/Chest.js'
 import Plant from '../items/Plant.js'
 import Iron from '../items/Iron.js'
+import Potion from '../items/Potion.js'
 import Monster from '../obstacles/Monster.js'
 import Crack from '../obstacles/Crack.js'
 import emitter from "../events/EventsCenter.js"
+import KeyExit from '../../../platforms/browser/www/js/items/KeyExit.js'
+import Sword from '../../../platforms/browser/www/js/items/Sword.js'
+import Exit from '../exit/Exit.js'
 
 // Escena principal, se carga el mapa con todo en el
 class Principal extends Phaser.Scene {
@@ -20,6 +24,7 @@ class Principal extends Phaser.Scene {
     }
 
     create() {
+        console.log(this)
         // Modo Debug
         this.modoDebug()
 
@@ -74,7 +79,31 @@ class Principal extends Phaser.Scene {
             physicsWorld: this.physics.world,
             scene: this,
             children: this.map.createFromObjects('item', 'plant', {key: 'plant'})
-        });       
+        });
+
+        this.potion = new Potion ({
+            physicsWorld: this.physics.world,
+            scene: this,
+            children: this.map.createFromObjects('item', 'potion', {key: 'potion'})
+        });
+
+        this.sword = new Sword ({
+            physicsWorld: this.physics.world,
+            scene: this,
+            children: this.map.createFromObjects('item', 'sword', {key: 'sword'})
+        });
+
+        this.keyExit = new KeyExit ({
+            physicsWorld: this.physics.world,
+            scene: this,
+            children: this.map.createFromObjects('item', 'keyExit', {key: 'keyExit'})
+        });
+
+        this.exit = new Exit ({
+            physicsWorld: this.physics.world,
+            scene: this,
+            children: this.map.createFromObjects('exit', 'exit', {key: 'exit'})
+        });
 
         // Colisiones con la capa de muros
         wall.setCollisionByExclusion([-1]);
@@ -98,6 +127,7 @@ class Principal extends Phaser.Scene {
             this.player.checkCollision(this.plant.colissionKey())
             emitter.on('action', () => {
                 this.scene.pause()
+                console.log(this)
                 this.scene.launch('Dialog', {
                     text: this.plant.dialog(), 
                     item: this.plant.addItem()
@@ -110,7 +140,7 @@ class Principal extends Phaser.Scene {
         });
 
         this.physics.add.collider(this.player, this.wizard, () => {
-            this.player.checkCollision(this.wizard.colissionKey())
+            this.player.checkCollision(this.wizard.collisionKey())
             emitter.on('action', () => {
                 this.scene.pause()
                 
@@ -121,8 +151,20 @@ class Principal extends Phaser.Scene {
         });
 
         this.physics.add.collider(this.player, this.crack, () => {
-            this.player.checkCollision()
+            this.player.checkCollision(this.crack.collisionKey())
+            this.scene.pause()
+            this.scene.launch('Dialog', {
+                text: this.crack.dialog(), 
+            })
+
+            this.player.block()
+
             emitter.on('action', () => {
+                this.scene.pause()
+                this.scene.launch('Dialog', {
+                    text: this.crack.dialog(), 
+                })
+
                 emitter.removeListener('action')
             })
         });
@@ -143,9 +185,12 @@ class Principal extends Phaser.Scene {
         });
 
         this.physics.add.collider(this.player, this.smith, () => {
-            this.player.checkCollision()
+            this.player.checkCollision(this.smith.collisionKey())
             emitter.on('action', () => {
-                console.log('smith')
+                this.scene.pause()
+                
+                this.smith.dialog()
+
                 emitter.removeListener('action')
             })
         });
@@ -163,6 +208,14 @@ class Principal extends Phaser.Scene {
             this.player.checkCollision()
             emitter.on('action', () => {
                 console.log('chest')
+                emitter.removeListener('action')
+            })
+        });
+
+        this.physics.add.collider(this.player, this.exit, () => {
+            this.player.checkCollision()
+            emitter.on('action', () => {
+                console.log('exit')
                 emitter.removeListener('action')
             })
         });

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="30" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="25">
+<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="30" height="28" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="31">
  <editorsettings>
   <export target="map1.json" format="json"/>
  </editorsettings>
@@ -78,11 +78,25 @@
    <point/>
   </object>
  </objectgroup>
+ <objectgroup id="8" name="exit">
+  <object id="29" name="exit" x="48" y="178.5" visible="0">
+   <point/>
+  </object>
+ </objectgroup>
  <objectgroup id="5" name="item">
   <object id="17" name="iron" x="449.724" y="288.424">
    <point/>
   </object>
   <object id="23" name="plant" x="16" y="210">
+   <point/>
+  </object>
+  <object id="26" name="potion" x="246.5" y="426.5" visible="0">
+   <point/>
+  </object>
+  <object id="27" name="sword" x="383" y="190.5" visible="0">
+   <point/>
+  </object>
+  <object id="28" name="keyExit" x="200.5" y="62" visible="0">
    <point/>
   </object>
  </objectgroup>

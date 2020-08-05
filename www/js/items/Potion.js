@@ -70,7 +70,7 @@ export default class Potion extends Phaser.Physics.Arcade.StaticGroup {
             style: {
                 fontFamily: 'ArialBlack', 
                 fontSize: '10px', 
-                align: 'left', 
+                align: 'center', 
                 //fontStyle: 'bold'
             }
         }

@@ -75,6 +75,29 @@
         }, 
         {
          "draworder":"topdown",
+         "id":8,
+         "name":"exit",
+         "objects":[
+                {
+                 "height":0,
+                 "id":29,
+                 "name":"exit",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":false,
+                 "width":0,
+                 "x":48,
+                 "y":178.5
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "draworder":"topdown",
          "id":5,
          "name":"item",
          "objects":[
@@ -101,6 +124,42 @@
                  "width":0,
                  "x":16,
                  "y":210
+                }, 
+                {
+                 "height":0,
+                 "id":26,
+                 "name":"potion",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":false,
+                 "width":0,
+                 "x":246.5,
+                 "y":426.5
+                }, 
+                {
+                 "height":0,
+                 "id":27,
+                 "name":"sword",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":false,
+                 "width":0,
+                 "x":383,
+                 "y":190.5
+                }, 
+                {
+                 "height":0,
+                 "id":28,
+                 "name":"keyExit",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":false,
+                 "width":0,
+                 "x":200.5,
+                 "y":62
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -166,8 +225,8 @@
          "x":0,
          "y":0
         }],
- "nextlayerid":8,
- "nextobjectid":25,
+ "nextlayerid":9,
+ "nextobjectid":31,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.1",

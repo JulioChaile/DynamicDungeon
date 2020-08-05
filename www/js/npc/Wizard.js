@@ -37,7 +37,7 @@ export default class Wizard extends Phaser.Physics.Arcade.StaticGroup {
     }
 
     // Retorna la key del objeto
-    colissionKey() {
+    collisionKey() {
         const key = this.getChildren()[0].name
         
         return key
@@ -113,29 +113,14 @@ export default class Wizard extends Phaser.Physics.Arcade.StaticGroup {
             }
         }
 
-        const item = {
-            key: 'potion',
-            name: '- Pocion misteriosa',
-            text: 'La unica forma de saber\nque hace es bebiendola',
-            event: 'crack',
-            style: {
-                fontFamily: 'ArialBlack', 
-                fontSize: '10px', 
-                align: 'left', 
-                //fontStyle: 'bold'
-            }
-        }
-
-        const txtItem = ''
-
-        this.scene.scene.launch('Dialog', {
-            text: txt
-        })
-
         // Emite el evento "erase" y envia el item a ser eliminado
         emitter.emit('erase', it)
 
-        // Emite el evento "addItem" y envia un objeto con texto (nombre del objeto y descripcion) y style
-        emitter.emit('addItem', item)
+        const txtItem = this.scene.scene.get('Principal').potion.addItem()
+
+        this.scene.scene.launch('Dialog', {
+            text: txt,
+            item: txtItem
+        })
     }
 }

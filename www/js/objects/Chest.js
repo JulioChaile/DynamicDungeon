@@ -56,6 +56,10 @@ export default class Chest extends Phaser.Physics.Arcade.StaticGroup {
                 item: txtItem
             })
         } else {
+            this.scene.anims.play('chs', this.chest)
+
+            this.check = true
+
             let txt = {
                 text: 'Dentro del cofre\nencuentras una llave.',
                 style: {

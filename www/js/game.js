@@ -2,6 +2,8 @@ import Principal from './scenes/Principal.js'
 import Bootloader from './Bootloader.js'
 import Dialog from "./scenes/Dialog.js";
 import UI from "./scenes/UI.js";
+import Menu from "./scenes/Menu.js";
+import GameOver from "./scenes/GameOver.js";
 
 var config = {
     type: Phaser.AUTO,
@@ -19,9 +21,11 @@ var config = {
     },
     scene: [
         Bootloader,
-        Principal,        
+        Menu,
+        Principal,
+        GameOver,        
         UI,
-        Dialog,
+        Dialog
     ]
 };
 

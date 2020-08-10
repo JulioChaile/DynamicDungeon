@@ -30,6 +30,9 @@ export default class Bootloader extends Phaser.Scene {
         this.load.spritesheet('smith', 'assets/npc/smith.png', {frameWidth: 16, frameHeight: 18})
         this.load.spritesheet('wizard', 'assets/npc/wizard.png', {frameWidth: 16, frameHeight: 32})
 
+        //exit
+        this.load.spritesheet('exit', 'assets/exit/exit.png', { frameWidth: 32, frameHeight: 32 });
+
         // items
         this.load.image('keyExit', 'assets/item/keyExit.png')
         this.load.image('iron', 'assets/item/iron.png')
@@ -49,10 +52,19 @@ export default class Bootloader extends Phaser.Scene {
         this.load.image('closed', 'assets/inventory/closed.png')
         this.load.image('showItem', 'assets/inventory/showItem.png')
 
+        // menu
+        this.load.image('menuBackground', 'assets/menu/menuBackground.png')
+        this.load.image('boton', 'assets/menu/boton.png')
+        this.load.image('jugar', 'assets/menu/jugar.png')
+        this.load.image('tittle', 'assets/menu/tittle.png')
+
+        // gameover
+        this.load.image('gameOverBackground', 'assets/gameover/gameOverBackground.png')
+
         this.load.on('complete', () => {
             const fontConfig = this.cache.json.get('fontConfig');
             this.cache.bitmapFont.add('pixelFont', Phaser.GameObjects.RetroFont.Parse(this, fontConfig));
-            this.scene.start('Principal');
+            this.scene.start('Menu');
         });
     }
 }

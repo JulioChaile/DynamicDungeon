@@ -69,13 +69,9 @@ export default class Knight extends Phaser.GameObjects.Sprite {
             }
         }
 
-        console.log(item, this.collissionKey)
-
         if(item.event === this.collissionKey) {
-            console.log('emitido')
             emitter.emit(item.event, item)
         } else {
-            console.log(this.scene)
             this.scene.scene.launch('Dialog', {
                 text: text
             })

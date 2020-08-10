@@ -24,7 +24,6 @@ class Principal extends Phaser.Scene {
     }
 
     create() {
-        console.log(this)
         // Modo Debug
         this.modoDebug()
 
@@ -127,7 +126,6 @@ class Principal extends Phaser.Scene {
             this.player.checkCollision(this.plant.colissionKey())
             emitter.on('action', () => {
                 this.scene.pause()
-                console.log(this)
                 this.scene.launch('Dialog', {
                     text: this.plant.dialog(), 
                     item: this.plant.addItem()
@@ -225,12 +223,23 @@ class Principal extends Phaser.Scene {
         });
 
         this.physics.add.collider(this.player, this.exit, () => {
-            this.player.checkCollision()
+            this.player.checkCollision(this.exit.collisionKey())
             emitter.on('action', () => {
-                console.log('exit')
+                this.scene.pause()
+                this.exit.dialog()
+
                 emitter.removeListener('action')
             })
-        });
+        }).name = 'exit';
+
+        // Fin del juego
+        this.physics.add.overlap(this.player, this.exit, () => {
+            this.exit.erased()
+            
+            this.scene.start('GameOver')
+            this.scene.stop('UI')
+            this.scene.stop()
+        })
         
         // Seguimiento de la camara y colision de la misma con los bordes del this.mapa
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);

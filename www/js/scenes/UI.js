@@ -10,7 +10,6 @@ export default class UI extends Phaser.Scene {
     }
 
     create() {
-        console.log(emitter.listeners('addItem'))
         // Caja de inventario inferior y texto de titulo
         this.inventoryimage = this.add.image(this.sys.game.config.width/2, this.sys.game.config.height - 48, 'inventory')
             .setInteractive()
@@ -110,21 +109,14 @@ export default class UI extends Phaser.Scene {
         this.item1 = this.items[0]
         this.item2 = this.items[1]
 
-        console.log(this.item1)
-
         if(this.items.length === 0) {
-            console.log('entra aca')
             if(this.itemSpace1 && this.textSpace1) {
-                console.log('y aca')
                 this.itemSpace1.setScale(0)
                 this.textSpace1.setScale(0)
             }
         }
 
-        console.log('salio')
-
         if(this.items.length === 1) {
-            console.log('pero entro aca')
             if(this.itemSpace1 && this.textSpace1) {
                 this.itemSpace1.destroy()
                 this.textSpace1.destroy()
@@ -138,7 +130,6 @@ export default class UI extends Phaser.Scene {
         }
 
         if (this.items.length > 1) {
-            console.log('tambie aca')
             if(this.itemSpace1 && this.textSpace1) {
                 this.itemSpace1.destroy()
                 this.textSpace1.destroy()
@@ -161,7 +152,6 @@ export default class UI extends Phaser.Scene {
             this.textSpace2 = this.add.text(36, this.sys.game.config.height - 24, this.item2.name, this.item2.style)
                 .setOrigin(0, 0.5)
         }        
-        console.log('y sigue saliendo')
     }
 
     // Agrega todos los items al inventario
@@ -170,8 +160,6 @@ export default class UI extends Phaser.Scene {
             .setOrigin(0)
 
         const items = this.cache.json.get('items')
-
-        console.log(items)
 
         this.items = items
         this.addItem(false)
@@ -340,8 +328,6 @@ export default class UI extends Phaser.Scene {
         )
 
         this.items.splice(index, 1)
-
-        console.log(this.items)
 
         this.inventory()
     }

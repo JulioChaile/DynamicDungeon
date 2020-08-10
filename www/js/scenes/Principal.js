@@ -7,10 +7,10 @@ import Iron from '../items/Iron.js'
 import Potion from '../items/Potion.js'
 import Monster from '../obstacles/Monster.js'
 import Crack from '../obstacles/Crack.js'
-import emitter from "../events/EventsCenter.js"
 import KeyExit from '../../../platforms/browser/www/js/items/KeyExit.js'
 import Sword from '../../../platforms/browser/www/js/items/Sword.js'
 import Exit from '../exit/Exit.js'
+import emitter from "../events/EventsCenter.js"
 
 // Escena principal, se carga el mapa con todo en el
 class Principal extends Phaser.Scene {
@@ -48,7 +48,7 @@ class Principal extends Phaser.Scene {
         this.crack = new Crack ({
             physicsWorld: this.physics.world,
             scene: this,
-            children: this.map.createFromObjects('obsta', 'crack')
+            children: this.map.createFromObjects('obsta', 'crack', {key: 'crack'})
         })
 
         this.chest = new Chest ({
@@ -81,16 +81,16 @@ class Principal extends Phaser.Scene {
             children: this.map.createFromObjects('item', 'plant', {key: 'plant'})
         });
 
-        this.potion = new Potion ({
-            physicsWorld: this.physics.world,
-            scene: this,
-            children: this.map.createFromObjects('item', 'potion', {key: 'potion'})
-        });
-
         this.sword = new Sword ({
             physicsWorld: this.physics.world,
             scene: this,
             children: this.map.createFromObjects('item', 'sword', {key: 'sword'})
+        });
+
+        this.potion = new Potion ({
+            physicsWorld: this.physics.world,
+            scene: this,
+            children: this.map.createFromObjects('item', 'potion', {key: 'potion'})
         });
 
         this.keyExit = new KeyExit ({
@@ -196,18 +196,30 @@ class Principal extends Phaser.Scene {
         });
 
         this.physics.add.collider(this.player, this.monster, () => {
-            this.player.checkCollision()
+            this.player.checkCollision(this.monster.collisionKey())
+            this.scene.pause()
+            this.scene.launch('Dialog', {
+                text: this.monster.dialog(), 
+            })
+
+            this.player.block()
+
             emitter.on('action', () => {
-                console.log('monster')
+                this.scene.pause()
+                this.scene.launch('Dialog', {
+                    text: this.monster.dialog(), 
+                })
+
                 emitter.removeListener('action')
             })
-            
         });
 
         this.physics.add.collider(this.player, this.chest, () => {
-            this.player.checkCollision()
+            this.player.checkCollision(this.chest.collisionKey())
             emitter.on('action', () => {
-                console.log('chest')
+                this.scene.pause()
+                this.chest.dialog(),
+
                 emitter.removeListener('action')
             })
         });

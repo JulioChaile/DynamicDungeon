@@ -78,6 +78,8 @@ export default class Potion extends Phaser.Physics.Arcade.StaticGroup {
         // Emite el evento "addItem" y envia un objeto con texto (nombre del objeto y descripcion) y style
         emitter.emit('addItem', item)
 
+        console.log(emitter.listeners('addItem'))
+
         return txt
     }
 }

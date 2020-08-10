@@ -24,7 +24,7 @@ export default class Crack extends Phaser.Physics.Arcade.StaticGroup {
     }
 
     // Retorna la key del objeto
-    colissionKey() {
+    collisionKey() {
         const key = this.getChildren()[0].name
         
         return key
@@ -49,13 +49,6 @@ export default class Crack extends Phaser.Physics.Arcade.StaticGroup {
     erased() {
         this.scene.physics.world.disable(this.crack)
         this.crack.setScale(0)
-    }
-
-    // Retorna la key del objeto
-    collisionKey() {
-        const key = this.getChildren()[0].name
-        
-        return key
     }
 
     action(it) {

@@ -11,7 +11,7 @@ export default class Exit extends Phaser.Physics.Arcade.StaticGroup {
     }
 
     // Retorna la key del objeto
-    colissionKey() {
+    collisionKey() {
         const key = this.getChildren()[0].name
         
         return key

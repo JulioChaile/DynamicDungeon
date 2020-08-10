@@ -45,7 +45,6 @@ export default class Smith extends Phaser.Physics.Arcade.StaticGroup {
         });
     }
 
-
     // Dialogo del npc
     dialog() {
         if(this.check) {

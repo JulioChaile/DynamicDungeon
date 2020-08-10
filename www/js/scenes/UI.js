@@ -10,6 +10,7 @@ export default class UI extends Phaser.Scene {
     }
 
     create() {
+        console.log(emitter.listeners('addItem'))
         // Caja de inventario inferior y texto de titulo
         this.inventoryimage = this.add.image(this.sys.game.config.width/2, this.sys.game.config.height - 48, 'inventory')
             .setInteractive()
@@ -27,14 +28,14 @@ export default class UI extends Phaser.Scene {
         })
         
         // Escuchador del evento "addItem"
-        emitter.on('addItem', (item) => {
+        emitter.on('addItem', item => {
             this.addItem(item)
         })
 
         // Escuchador del Modo Debug
         emitter.on('debug', () => {
             this.modoDebug()
-            emitter.removeListener()
+            emitter.removeListener('debug')
         })
 
         // Escuchador para borrar items del inventario
@@ -115,8 +116,8 @@ export default class UI extends Phaser.Scene {
             console.log('entra aca')
             if(this.itemSpace1 && this.textSpace1) {
                 console.log('y aca')
-                this.itemSpace1.destroy()
-                this.textSpace1.destroy()
+                this.itemSpace1.setScale(0)
+                this.textSpace1.setScale(0)
             }
         }
 

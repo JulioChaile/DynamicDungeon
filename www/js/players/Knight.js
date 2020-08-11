@@ -16,13 +16,17 @@ export default class Knight extends Phaser.GameObjects.Sprite {
         this.cursors = this.scene.input.keyboard.createCursorKeys();
 
         this.check = false
+
+        this.pointer = this.scene.input.activePointer
+
+        console.log(this.scene)
         
         emitter.on('use',  item => {
                 this.useItem(item)
         })
     }
 
-    // cheackea que se esta colisionando con un objeto
+    // Checkea que se esta colisionando con un objeto
     checkCollision(key) {
         this.check = true
 
@@ -30,7 +34,7 @@ export default class Knight extends Phaser.GameObjects.Sprite {
     }
 
     createAnim() {
-        // creacion de las animaciones de movimiento para el jugador
+        // Creacion de las animaciones de movimiento para el jugador
         this.scene.anims.create({
             key: 'left',
             frames: this.scene.anims.generateFrameNumbers('player', { frames: [4, 5, 6, 7, 8]}),
@@ -83,54 +87,71 @@ export default class Knight extends Phaser.GameObjects.Sprite {
         this.cursors.right.isDown = false
         this.cursors.up.isDown = false
         this.cursors.down.isDown = false
+
+        this.pointer.isDown = false
+        this.pointer.isUp = false
     }
 
     update() {
-        // deja quieto al jugador
+        // Pocision del puntero relativa al mundo
+        var pointer = {
+            x: '',
+            y: ''
+        }
+
+        // Condicion del puntero/touch
+        if(this.pointer.isDown) {
+            var move = true
+            pointer = this.pointer.camera.getWorldPoint(this.pointer.x, this.pointer.y)
+        } else {
+            var move = false
+        }
+
+        // Deja quieto al jugador
         this.body.setVelocity(0);
 
-        // interacciones con objetos del mapa
+        // Interacciones con objetos del mapa
         if (Phaser.Input.Keyboard.JustDown(this.cursors.space) && this.check) {
             emitter.emit('action')
         }
 
         // Horizontal movement
-        if (this.cursors.left.isDown)
+        if (this.cursors.left.isDown || pointer.x < this.x - 12 && move)
         {
             this.body.setVelocityX(-80);
             this.flipX = true;
         }
-        else if (this.cursors.right.isDown)
+        else if (this.cursors.right.isDown || pointer.x > this.x + 12 && move)
         {
             this.body.setVelocityX(80);
         }
 
         // Vertical movement
-        if (this.cursors.up.isDown)
+        if (this.cursors.up.isDown || pointer.y < this.y - 12 && move)
         {
             this.body.setVelocityY(-80);
         }
-        else if (this.cursors.down.isDown)
+        else if (this.cursors.down.isDown || pointer.y > this.y + 12  && move)
         {
             this.body.setVelocityY(80);
         }
         
-        // se llama a las animaciones segun donde se mueva
-        if (this.cursors.left.isDown)
+        // Se llama a las animaciones segun donde se mueva
+        if (this.cursors.left.isDown || pointer.x < this.x - 12 && move)
         {
             this.anims.play('left', true);
             this.flipX = true;
         }
-        else if (this.cursors.right.isDown)
+        else if (this.cursors.right.isDown || pointer.x > this.x + 12 && move)
         {
             this.anims.play('right', true);
             this.flipX = false;
         }
-        else if (this.cursors.up.isDown)
+        else if (this.cursors.up.isDown || pointer.y < this.y - 12 && move)
         {
             this.anims.play('up', true);
         }
-        else if (this.cursors.down.isDown)
+        else if (this.cursors.down.isDown || pointer.y > this.y + 12 && move)
         {
             this.anims.play('down', true);
         }

@@ -150,13 +150,17 @@ class Principal extends Phaser.Scene {
 
         this.physics.add.collider(this.player, this.crack, () => {
             this.player.checkCollision(this.crack.collisionKey())
-            this.scene.pause()
-            this.scene.launch('Dialog', {
-                text: this.crack.dialog(), 
-            })
 
             this.player.block()
 
+            this.input.on('pointerup', () => {
+                this.scene.pause()
+                this.scene.launch('Dialog', {
+                    text: this.crack.dialog(), 
+                })
+                this.input.removeListener('pointerup')
+            })
+            
             emitter.on('action', () => {
                 this.scene.pause()
                 this.scene.launch('Dialog', {
@@ -195,12 +199,16 @@ class Principal extends Phaser.Scene {
 
         this.physics.add.collider(this.player, this.monster, () => {
             this.player.checkCollision(this.monster.collisionKey())
-            this.scene.pause()
-            this.scene.launch('Dialog', {
-                text: this.monster.dialog(), 
-            })
 
             this.player.block()
+
+            this.input.on('pointerup', () => {
+                this.scene.pause()
+                this.scene.launch('Dialog', {
+                    text: this.monster.dialog(), 
+                })
+                this.input.removeListener('pointerup')
+            })
 
             emitter.on('action', () => {
                 this.scene.pause()

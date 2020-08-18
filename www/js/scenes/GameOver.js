@@ -1,6 +1,8 @@
+import emitter from "../events/EventsCenter.js"
+
 class GameOver extends Phaser.Scene {
     constructor() {
-        super('GameOver')
+        super({key: 'GameOver'})
     }
 
     init() {
@@ -21,7 +23,7 @@ class GameOver extends Phaser.Scene {
             }
         }
 
-        const text = this.add.text(80, 0, txt.text, txt.style)
+        const text = this.add.text(80, 48, txt.text, txt.style)
             .setOrigin(0.5, 0)
             .setInteractive()
 

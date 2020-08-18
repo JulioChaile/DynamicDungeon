@@ -19,6 +19,12 @@ export default class Chest extends Phaser.Physics.Arcade.StaticGroup {
         this.scene.physics.world.enable(this.chest, 1)
         
         this.add(this.chest)
+
+        emitter.on('touch', touch => {
+            if (touch.key === this.getChildren()[0].name) {
+                this.actionTouch(touch.position)
+            }
+        })
     }
 
     // Retorna la key del objeto
@@ -76,6 +82,24 @@ export default class Chest extends Phaser.Physics.Arcade.StaticGroup {
                 text: txt,
                 item: txtItem
             })
+        }
+    }
+
+    actionTouch(position) {
+        const hitArea = {
+            top: this.getChildren()[0].body.top,
+            bottom: this.getChildren()[0].body.bottom,
+            left: this.getChildren()[0].body.left,
+            right: this.getChildren()[0].body.right
+        }
+
+        if(
+            position.x >= hitArea.left &&
+            position.x <= hitArea.right &&
+            position.y >= hitArea.top &&
+            position.y <= hitArea.bottom
+        ) {
+            emitter.emit('action')
         }
     }
 }

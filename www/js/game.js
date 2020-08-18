@@ -10,22 +10,22 @@ var config = {
     parent: 'content',
     width: 160,
     height: 240,
-    zoom: 10,
+    zoom: 3,
     pixelArt: true,
     physics: {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            debug: true
+            debug: false
         }
     },
     scene: [
         Bootloader,
         Menu,
-        Principal,
-        GameOver,        
+        Principal,     
         UI,
-        Dialog
+        Dialog,
+        GameOver,
     ]
 };
 

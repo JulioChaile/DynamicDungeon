@@ -17,9 +17,9 @@ export default class Knight extends Phaser.GameObjects.Sprite {
 
         this.check = false
 
-        this.pointer = this.scene.input.activePointer
+        this.collisionKey = ''
 
-        console.log(this.scene)
+        this.pointer = this.scene.input.activePointer
         
         emitter.on('use',  item => {
                 this.useItem(item)
@@ -30,7 +30,7 @@ export default class Knight extends Phaser.GameObjects.Sprite {
     checkCollision(key) {
         this.check = true
 
-        this.collissionKey = key
+        this.collisionKey = key
     }
 
     createAnim() {
@@ -73,7 +73,7 @@ export default class Knight extends Phaser.GameObjects.Sprite {
             }
         }
 
-        if(item.event === this.collissionKey) {
+        if(item.event === this.collisionKey) {
             emitter.emit(item.event, item)
         } else {
             this.scene.scene.launch('Dialog', {
@@ -92,66 +92,71 @@ export default class Knight extends Phaser.GameObjects.Sprite {
         this.pointer.isUp = false
     }
 
+    pointerPosition() {
+        return this.pointer.camera.getWorldPoint(this.pointer.x, this.pointer.y)
+    }
+
     update() {
-        // Pocision del puntero relativa al mundo
-        var pointer = {
-            x: '',
-            y: ''
-        }
-
-        // Condicion del puntero/touch
-        if(this.pointer.isDown) {
-            var move = true
-            pointer = this.pointer.camera.getWorldPoint(this.pointer.x, this.pointer.y)
-        } else {
-            var move = false
-        }
-
         // Deja quieto al jugador
         this.body.setVelocity(0);
+
+        let move
+
+        if (this.pointer.isDown) {
+            move = true
+        } else {
+            move = false
+        }
 
         // Interacciones con objetos del mapa
         if (Phaser.Input.Keyboard.JustDown(this.cursors.space) && this.check) {
             emitter.emit('action')
         }
 
+        if(this.pointer.justDown && this.check) {
+            emitter.emit('touch', {
+                position: this.pointerPosition(),
+                key: this.collisionKey
+            })
+        }
+
         // Horizontal movement
-        if (this.cursors.left.isDown || pointer.x < this.x - 12 && move)
+        if (this.cursors.left.isDown || this.pointer.x < 68 && this.pointer.y < 152 && move)
         {
             this.body.setVelocityX(-80);
             this.flipX = true;
         }
-        else if (this.cursors.right.isDown || pointer.x > this.x + 12 && move)
+        else if (this.cursors.right.isDown || this.pointer.x > 92 && this.pointer.y < 152 && move)
         {
             this.body.setVelocityX(80);
         }
 
         // Vertical movement
-        if (this.cursors.up.isDown || pointer.y < this.y - 12 && move)
+        if (this.cursors.up.isDown || this.pointer.y < 68 && move)
         {
             this.body.setVelocityY(-80);
         }
-        else if (this.cursors.down.isDown || pointer.y > this.y + 12  && move)
+        else if (this.cursors.down.isDown || 152 > this.pointer.y && this.pointer.y > 92 && move)
         {
             this.body.setVelocityY(80);
         }
         
         // Se llama a las animaciones segun donde se mueva
-        if (this.cursors.left.isDown || pointer.x < this.x - 12 && move)
+        if (this.cursors.left.isDown || this.pointer.x < 68 && this.pointer.y < 152 && move)
         {
             this.anims.play('left', true);
             this.flipX = true;
         }
-        else if (this.cursors.right.isDown || pointer.x > this.x + 12 && move)
+        else if (this.cursors.right.isDown || this.pointer.x > 92 && this.pointer.y < 152 && move)
         {
             this.anims.play('right', true);
             this.flipX = false;
         }
-        else if (this.cursors.up.isDown || pointer.y < this.y - 12 && move)
+        else if (this.cursors.up.isDown || this.pointer.y < 68 && move)
         {
             this.anims.play('up', true);
         }
-        else if (this.cursors.down.isDown || pointer.y > this.y + 12 && move)
+        else if (this.cursors.down.isDown || this.pointer.y < 152 && this.pointer.y > 92 && move)
         {
             this.anims.play('down', true);
         }
@@ -160,12 +165,16 @@ export default class Knight extends Phaser.GameObjects.Sprite {
             this.anims.play('down', true); // esto es para que de saltitos en el lugar      
         }        
  
-        if (this.cursors.up.isDown || this.cursors.down.isDown || this.cursors.left.isDown || this.cursors.right.isDown) {
+        if (
+            this.cursors.up.isDown || 
+            this.cursors.down.isDown || 
+            this.cursors.left.isDown || 
+            this.cursors.right.isDown || 
+            this.pointer.isDown && !this.pointer.justDown
+        ) {
             this.check = false
 
             emitter.removeListener('action')
-
-            this.collisionKey = ''
         }
     }
 }

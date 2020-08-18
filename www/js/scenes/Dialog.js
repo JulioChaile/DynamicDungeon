@@ -33,6 +33,8 @@ export default class Dialog extends Phaser.Scene {
     }
 
     create(data) {
+        this.pointer = this.input.activePointer
+        
         // Checkea si se le envio un item a la escena para msotrar
         if (data.item) {
             this.checkItem = true 
@@ -63,7 +65,7 @@ export default class Dialog extends Phaser.Scene {
         })
 
         // Se elimina la ventana de dialogo luego de hacer click en algun punto
-        this.input.on('pointerup', () => {
+        this.events.on('dialog', () => {
             this.add.tween({
                 targets: [dialog, text],
                 scaleX: 0,
@@ -77,7 +79,7 @@ export default class Dialog extends Phaser.Scene {
                         this.scene.resume('Principal');
                         this.scene.resume('UI');
                         this.scene.sleep()
-                        this.input.removeListener('pointerup')
+                        this.events.removeListener('dialog')
                         emitter.emit('finish')
                     }
                 }
@@ -107,8 +109,8 @@ export default class Dialog extends Phaser.Scene {
             ease: 'Bounce'
         })
 
-        this.input.on('pointerup', () => {
-            this.input.removeListener('pointerup')
+        this.events.on('dialog', () => {
+            this.events.removeListener('dialog')
             this.checkItem = false
             this.add.tween({
                 targets: [dialog, text],
@@ -124,5 +126,12 @@ export default class Dialog extends Phaser.Scene {
                 }
             });
         });
+    }
+
+    update() {
+        if(this.pointer.justDown) {
+            this.events.emit('dialog')
+        }
+        this.pointer.isDown = false
     }
 }

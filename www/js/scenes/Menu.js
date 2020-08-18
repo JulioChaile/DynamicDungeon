@@ -5,7 +5,6 @@ class Menu extends Phaser.Scene {
 
     init() {
         console.log("Hola, soy un Easter Egg's")
-        console.log(this.scene)
     }
 
     create() {

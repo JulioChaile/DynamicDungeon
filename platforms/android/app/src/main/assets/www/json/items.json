@@ -1,0 +1,62 @@
+[
+    {
+        "key": "iron",
+        "name": "- Trozo de hierro",
+        "text": "Un buen herrero podria\nhacer maravillas con esto.",
+        "event": "smith",
+        "style": {
+            "fontFamily": "ArialBlack", 
+            "fontSize": "10px", 
+            "align": "left", 
+            "fontstyle": "bold"
+        }
+    },
+    {
+        "key": "keyExit",
+        "name": "- Llave dorada",
+        "text": "A un costado se puede\nleer una inscripcion:\n'Libertad'",
+        "event": "exit",
+        "style": {
+            "fontFamily": "ArialBlack", 
+            "fontSize": "10px", 
+            "align": "left", 
+            "fontstyle": "bold"
+        }
+    },
+    {
+        "key": "plant",
+        "name": "- Planta misteriosa",
+        "text": "Este tipo de planta normalmente\nse usa en hechizos y pociones",
+        "event": "wizard",
+        "style": {
+            "fontFamily": "ArialBlack", 
+            "fontSize": "10px", 
+            "align": "left", 
+            "fontstyle": "bold"
+        }
+    },
+    {
+        "key": "potion",
+        "name": "- Pocion misteriosa",
+        "text": "La unica forma de saber\nque hace es bebiendola",
+        "event": "crack",
+        "style": {
+            "fontFamily": "ArialBlack", 
+            "fontSize": "10px", 
+            "align": "left", 
+            "fontstyle": "bold"
+        }
+    },
+    {
+        "key": "sword",
+        "name": "- Espada de hierro",
+        "text": "El filo de esta espada podria\npartir en dos\na cualquier bestia",
+        "event": "monster",
+        "style": {
+            "fontFamily": "ArialBlack", 
+            "fontSize": "10px", 
+            "align": "left", 
+            "fontStyle": "bold"
+        }
+    }
+]

@@ -1,7 +1,7 @@
 {
   "name": "dynamicdungeon",
   "displayName": "Dynamic Dungeon",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Game that generates dungeons dynamically for each level.",
   "main": "index.js",
   "scripts": {
@@ -19,6 +19,7 @@
     "phaser3-rex-plugins": "^1.1.21"
   },
   "devDependencies": {
+    "cordova-android": "^9.0.0",
     "cordova-plugin-whitelist": "^1.3.4"
   },
   "cordova": {
@@ -26,7 +27,8 @@
       "cordova-plugin-whitelist": {}
     },
     "platforms": [
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }
